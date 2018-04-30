@@ -104,7 +104,7 @@ class sync_checker {
 
         $info = '';
 
-        $records = $DB->get_records(self::SYNC_LOG_TABLE, $this->get_search_params());
+        $records = $DB->get_records(self::SYNC_LOG_TABLE, $this->get_search_params(), 'id');
 
         if ($records) {
             $record = reset($records);

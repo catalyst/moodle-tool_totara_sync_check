@@ -103,7 +103,7 @@ class tool_totara_sync_check_sync_checker_testcase extends advanced_testcase {
 
     public function test_return_error() {
         $this->add_test_records(3, 3, 3, 3);
-        $this->assertEquals('Error unknown 33', $this->checker->get_error());
+        $this->assertEquals('Error unknown 31', $this->checker->get_error());
     }
 
     public function test_return_empty_error_if_no_error() {
