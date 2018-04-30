@@ -111,4 +111,23 @@ class tool_totara_sync_check_sync_checker_testcase extends advanced_testcase {
         $this->assertEquals('', $this->checker->get_error());
     }
 
+    public function test_return_empty_last_record_date_if_no_records() {
+        $this->assertEmpty($this->checker->get_last_record_date());
+    }
+
+    public function test_return_correct_last_record_date_if_no_records() {
+        global $DB;
+
+        $this->record->time = 12345676;
+        $DB->insert_record('totara_sync_log', $this->record);
+        $this->record->time = 12345678;
+        $DB->insert_record('totara_sync_log', $this->record);
+        $this->record->time = 12345679;
+        $DB->insert_record('totara_sync_log', $this->record);
+        $this->record->time = 12345677;
+        $DB->insert_record('totara_sync_log', $this->record);
+
+        $this->assertEquals(12345679, $this->checker->get_last_record_date());
+    }
+
 }

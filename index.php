@@ -34,12 +34,14 @@ header('Expires: Tue, 04 Sep 2012 05:32:29 GMT');
 
 $checker = new \tool_totara_sync_check\sync_checker();
 $error = $checker->get_error();
+$lastrecord = $checker->get_last_record_date();
 
 $now = userdate(time(), '%b %d %H:%M:%S');
+$lastrecordstring = empty($lastrecord) ? '(never ran)' : '(finished ' . userdate($lastrecord, '%b %d %H:%M:%S') . ')';
 
 if ($error) {
     header("HTTP/1.0 500 HR Import failed: $error");
-    print "HR Import - ERROR: $error (Checked $now)\n";
+    print "HR Import - ERROR: $error $lastrecordstring  (Checked $now)\n";
 } else {
-    print "HR Import - OK (Checked $now)\n";
+    print "HR Import - OK $lastrecordstring (Checked $now)\n";
 }

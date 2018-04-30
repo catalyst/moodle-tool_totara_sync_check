@@ -52,7 +52,7 @@ class sync_checker {
     protected function get_run_id() {
         global $DB;
 
-        $runid = $DB->get_field_sql('SELECT MAX(runid) FROM {totara_sync_log}');
+        $runid = $DB->get_field(self::SYNC_LOG_TABLE, 'MAX(runid)', []);
 
         if (!empty($runid)) {
             return $runid;
@@ -112,6 +112,24 @@ class sync_checker {
         }
 
         return $info;
+    }
+
+    /**
+     * Get the last record date from log table.
+     *
+     * @return string
+     * @throws \dml_exception
+     */
+    public function get_last_record_date() {
+        global $DB;
+
+        $time = $DB->get_field(self::SYNC_LOG_TABLE, 'MAX(time)', []);
+
+        if (!empty($time)) {
+            return $time;
+        } else {
+            return 0;
+        }
     }
 
 }
