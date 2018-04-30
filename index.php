@@ -32,7 +32,20 @@ header('Pragma: no-cache');
 header('Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate, proxy-revalidate');
 header('Expires: Tue, 04 Sep 2012 05:32:29 GMT');
 
+
 $checker = new \tool_totara_sync_check\sync_checker();
+
+global $DB;
+$record = new stdClass();
+$record->time = time();
+$record->element = 'Test Element';
+$record->logtype = 'error';
+$record->action = 'unknown';
+$record->info = 'Test error';
+$record->runid = 4;
+$DB->insert_record('totara_sync_log', $record);
+\tool_totara_sync\event\sync_completed::create()->trigger();
+
 $error = $checker->get_error();
 $lastrecord = $checker->get_last_record_date();
 

@@ -29,3 +29,4 @@ $string['notify'] = 'Send notifications?';
 $string['notify_desc'] = 'If enabled, email notifications will be sent to configured email addresses once an error occurred.';
 $string['notifylist'] = 'Notification list';
 $string['notifylist_desc'] = 'A comma separated list of emails to send notifications to.';
+$string['subject'] = 'Totara HR Sync failed';

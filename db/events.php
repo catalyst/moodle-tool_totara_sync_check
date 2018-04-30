@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version info.
+ * Event observers.
  *
  * @package    tool_totara_sync_check
  * @copyright  2018 Dmitrii Metelkin <dmitriim@catalyst-au.net>
@@ -24,6 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2018042701; // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2015051110; // Requires this Moodle version.
-$plugin->component = 'tool_totara_sync_check'; // Full name of the plugin (used for diagnostics).
+$observers = array(
+    array(
+        'eventname' => '\tool_totara_sync\event\sync_completed',
+        'callback' => '\tool_totara_sync_check\events_observer::sync_completed',
+    ),
+);
